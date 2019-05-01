@@ -1,0 +1,16 @@
+{
+  "name": "amazon-ses-slack-notifier",
+  "version": "1.0.0",
+  "description": "slack notifier via mail delivery for amazon ses",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "orangevtr",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.446.0",
+    "mailparser": "^2.6.0",
+    "serverless-plugin-existing-s3": "^2.3.3"
+  }
+}
