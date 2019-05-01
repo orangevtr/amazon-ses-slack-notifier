@@ -11,7 +11,10 @@
 #
 # Happy Coding!
 
-service: aws-nodejs # NOTE: update this with your service name
+plugins:
+  - serverless-plugin-existing-s3
+
+service: amazon-ses-slack-notifier # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -23,10 +26,14 @@ provider:
 
 # you can overwrite defaults here
 #  stage: dev
-#  region: us-east-1
+  region: ap-northeast-1
 
 # you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource: "*"
 #    - Effect: "Allow"
 #      Action:
 #        - "s3:ListBucket"
@@ -55,18 +62,20 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  postprocess:
+    handler: handler.postprocess
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
-#    events:
+    events:
 #      - http:
 #          path: users/create
 #          method: get
 #      - websocket: $connect
-#      - s3: ${env:BUCKET}
+      - s3:
+          bucket: ${env:DELIVERY_BUCKET}
+          event: s3:ObjectCreated:*
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
 #      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
