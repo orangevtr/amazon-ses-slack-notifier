@@ -44,7 +44,28 @@ module.exports.postprocess = async(event) => {
 
         console.log(JSON.stringify(message))
 
-        await notifier(message, null, options);
+        const attachments = [];
+        for (let i = 0; i < email.attachments.length; i++) {
+            const attachment = email.attachments[i];
+            const upload_request = {
+                Bucket: process.env.ATTACHMENT_STORAGE_BUCKET,
+                Key: [email.messageId, attachment.filename].join('/'),
+                Body: attachment.content,
+                ContentType: attachment.contentType,
+                ACL: 'public-read'
+            };
+            const upload_result = await s3.upload(upload_request).promise();
+            console.log('uploaded result on S3: ');
+            console.log(upload_result);
+            attachments.push({
+                name: attachment.filename,
+                link: upload_result.Location
+            });
+        }
+
+        console.log(JSON.stringify(attachments))
+
+        await notifier(message, attachments, options);
 
         return {
             status: 'success'
