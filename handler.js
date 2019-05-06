@@ -12,9 +12,7 @@ const simpleParser = require('mailparser').simpleParser;
 const notifier = require('./lib/slack-notify-message.js');
 
 const options = {
-    channel: '#sandbox',
-    icon_emoji: ':akiyoshi:',
-    username: 'notifierテストユーザ'
+    channel: '#mailbox',
 };
 
 module.exports.postprocess = async(event) => {
