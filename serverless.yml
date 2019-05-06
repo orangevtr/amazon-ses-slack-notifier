@@ -44,13 +44,9 @@ functions:
           events:
             - s3:ObjectCreated:*
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+resources:
+  Resources:
+    S3BucketAttachments:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${env:ATTACHMENT_STORAGE_BUCKET_BASENAME}-bucket
