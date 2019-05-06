@@ -46,7 +46,7 @@ module.exports.postprocess = async(event) => {
 
         console.log(JSON.stringify(message))
 
-        notifier(message, null, options);
+        await notifier(message, null, options);
 
         return {
             status: 'success'
