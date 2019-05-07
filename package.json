@@ -9,8 +9,8 @@
   "author": "orangevtr",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.446.0",
-    "mailparser": "^2.6.0",
+    "@kenjiuno/mailparser-with-iso2022jp": "^0.1.0",
+    "aws-sdk": "^2.450.0",
     "serverless-plugin-existing-s3": "^2.3.3",
     "slack-notify": "^0.1.7"
   }

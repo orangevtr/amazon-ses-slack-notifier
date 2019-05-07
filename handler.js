@@ -7,7 +7,7 @@ const s3 = new AWS.S3({
     region: process.env.AWSREGION,
 });
 
-const simpleParser = require('mailparser').simpleParser;
+const simpleParser = require('@kenjiuno/mailparser-with-iso2022jp').simpleParser;
 
 const notifier = require('./lib/slack-notify-message.js');
 
